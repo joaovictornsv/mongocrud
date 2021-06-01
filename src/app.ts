@@ -1,19 +1,14 @@
 import 'reflect-metadata';
 import express from 'express';
-import mongoose from 'mongoose';
 import { v4 as uuid } from 'uuid';
 import Profile from './entities/Profile';
+import connectToDatabase from './database';
 
 const app = express();
 
-app.use(express.json());
-mongoose.connect('mongodb://localhost/mongocrud', { useNewUrlParser: true, useUnifiedTopology: true });
+connectToDatabase();
 
-export const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected!');
-});
+app.use(express.json());
 
 app.get('/profiles', async (req, res) => {
   const profiles = await Profile.find();
