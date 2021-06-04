@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
-import { v4 as uuid } from 'uuid';
-import Profile from './entities/Profile';
+import Player from './entities/Player';
 import connectToDatabase from './database';
 
 const app = express();
@@ -10,13 +9,13 @@ connectToDatabase();
 
 app.use(express.json());
 
-app.get('/profiles', async (req, res) => {
-  const profiles = await Profile.find();
+app.get('/players', async (req, res) => {
+  const profiles = await Player.find();
 
   res.status(200).json(profiles);
 });
 
-app.post('/profiles', async (req, res) => {
+app.post('/players', async (req, res) => {
   const {
     firstName,
     lastName,
@@ -25,8 +24,7 @@ app.post('/profiles', async (req, res) => {
     team,
   } = req.body;
 
-  const profile = await Profile.create({
-    _id: uuid(),
+  const profile = await Player.create({
     firstName,
     lastName,
     age,
