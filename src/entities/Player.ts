@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
-import { v4 as uuid } from 'uuid';
 
 const Player = new mongoose.Schema({
-  _id: { type: String, required: true, default: () => uuid() },
   firstName: { type: String, trim: true, default: '' },
   lastName: { type: String, trim: true, default: '' },
   age: { type: Number, default: 0 },
