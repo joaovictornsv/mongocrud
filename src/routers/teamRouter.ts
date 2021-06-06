@@ -1,26 +1,12 @@
 import { Router } from 'express';
-import Team from '../entities/Team';
+import { TeamController } from '../controllers/TeamController';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-  const teams = await Team.find().populate({ path: 'players', select: 'firstName lastName position -_id' });
+const teamController = new TeamController();
 
-  res.status(200).json(teams);
-});
+router.get('/', teamController.indexAll);
 
-router.post('/', async (req, res) => {
-  const { name, coach } = req.body;
-
-  const teamExists = await Team.findOne({ name });
-
-  if (teamExists) {
-    return res.status(400).json({ message: 'Team already exists' });
-  }
-
-  const team = await Team.create({ name, coach });
-
-  res.status(201).json(team);
-});
+router.post('/', teamController.create);
 
 export { router as teamRouter };
