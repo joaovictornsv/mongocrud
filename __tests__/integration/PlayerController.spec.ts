@@ -16,11 +16,13 @@ const responseStatusCodeSpy = jest.spyOn(ResponseMock, 'status');
 
 // Util Functions
 const createUserWithSuccess = async () => {
-  Player.create = jest.fn().mockResolvedValue(PlayerResponseMock);
+  Player.create = jest.fn().mockImplementationOnce(() => {
+    PlayerArrayResponseMock.push('mock-player');
+    return PlayerResponseMock;
+  });
   Team.findOne = jest.fn().mockResolvedValueOnce(true);
   Team.findByIdAndUpdate = jest.fn().mockImplementationOnce(() => {
     TeamResponseMock.players.push('mock-player');
-    PlayerArrayResponseMock.push('mock-player');
   });
 
   RequestMock.body = PlayerResquestMock;
@@ -33,7 +35,6 @@ const createUserWithSuccess = async () => {
 describe('PlayerController', () => {
   beforeEach(() => {
     RequestMock.body = {};
-    RequestMock.params = {};
     TeamResponseMock.players = [];
     PlayerArrayResponseMock.splice(0, PlayerArrayResponseMock.length);
   });
