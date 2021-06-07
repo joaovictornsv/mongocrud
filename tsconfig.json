@@ -8,6 +8,15 @@
     "rootDir": "./src",
     "removeComments": true,
     "baseUrl": ".",
+    "paths": {
+      "@config/*": ["./src/config/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@repositories/*": ["./src/repositories/*"],
+      "@views/*": ["./src/views/*"],
+      "@routers/*": ["./src/routers/*"],
+      "@services/*": ["./src/services/*"],
+    },
     "typeRoots": [
       "./node_modules/@types",
       "./src/@types"
