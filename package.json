@@ -4,7 +4,9 @@
   "main": "src/serve.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only --no-notify src/server.ts"
+    "dev": "tsnd -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only --no-notify src/server.ts",
+    "test": "NODE_ENV=test jest --runInBand --no-cache",
+    "test:coverage": "test -- --coverage"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
@@ -13,14 +15,23 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-decorators": "^7.14.2",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-typescript": "^7.13.0",
     "@types/express": "^4.17.12",
+    "@types/jest": "^26.0.23",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
+    "babel-jest": "^27.0.2",
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
     "ts-node-dev": "^1.1.6",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.3.2"
