@@ -10,3 +10,5 @@ export const TeamResponseMock = {
   coach: 'coach-mock',
   __v: 0,
 };
+
+export const TeamArrayResponseMock = [];
