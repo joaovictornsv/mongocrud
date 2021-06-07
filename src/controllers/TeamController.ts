@@ -5,7 +5,7 @@ class TeamController {
   async indexAll(req: Request, res: Response) {
     const teams = await Team.find().populate({ path: 'players', select: 'firstName lastName position -_id' });
 
-    res.status(200).json(teams);
+    return res.status(200).json(teams);
   }
 
   async create(req: Request, res: Response) {
@@ -19,7 +19,7 @@ class TeamController {
 
     const team = await Team.create({ name, coach });
 
-    res.status(201).json(team);
+    return res.status(201).json(team);
   }
 }
 

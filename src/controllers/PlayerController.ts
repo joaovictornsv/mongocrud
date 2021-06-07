@@ -6,7 +6,7 @@ class PlayerController {
   async indexAll(req: Request, res: Response) {
     const profiles = await Player.find().populate({ path: 'team', select: 'name coach -_id' });
 
-    res.status(200).json(profiles);
+    return res.status(200).json(profiles);
   }
 
   async create(req: Request, res: Response) {
@@ -42,7 +42,7 @@ class PlayerController {
 
     await Team.findByIdAndUpdate(teamExists.id, { $push: { players: profile } });
 
-    res.status(201).json(profile);
+    return res.status(201).json(profile);
   }
 }
 
