@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Player from '../entities/Player';
-import Team from '../entities/Team';
+import Player from '@entities/Player';
+import Team from '@entities/Team';
 
 class PlayerController {
   async indexAll(req: Request, res: Response) {

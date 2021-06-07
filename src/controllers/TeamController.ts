@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Team from '../entities/Team';
+import Team from '@entities/Team';
 
 class TeamController {
   async indexAll(req: Request, res: Response) {
