@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only --no-notify src/server.ts",
     "test": "NODE_ENV=test jest --runInBand --no-cache",
-    "test:coverage": "yarn test -- --coverage"
+    "test:coverage": "yarn test --coverage"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
