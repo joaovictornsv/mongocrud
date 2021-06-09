@@ -1,7 +1,7 @@
 {
   "name": "mongocrud",
   "version": "1.0.0",
-  "main": "src/serve.ts",
+  "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only --no-notify src/server.ts",
