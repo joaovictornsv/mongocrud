@@ -1,14 +1,5 @@
 import { pathsToModuleNameMapper } from 'ts-jest/utils';
-
-const compilerPaths = {
-  '@config/*': ['./src/config/*'],
-  '@controllers/*': ['./src/controllers/*'],
-  '@entities/*': ['./src/entities/*'],
-  '@repositories/*': ['./src/repositories/*'],
-  '@views/*': ['./src/views/*'],
-  '@routers/*': ['./src/routers/*'],
-  '@services/*': ['./src/services/*'],
-};
+import { compilerOptions } from './tsconfig.json';
 
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
@@ -95,7 +86,7 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: pathsToModuleNameMapper(compilerPaths, { prefix: '<rootDir>' }),
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>' }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

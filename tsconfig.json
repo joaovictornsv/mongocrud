@@ -15,7 +15,7 @@
       "@repositories/*": ["./src/repositories/*"],
       "@views/*": ["./src/views/*"],
       "@routers/*": ["./src/routers/*"],
-      "@services/*": ["./src/services/*"],
+      "@services/*": ["./src/services/*"]
     },
     "typeRoots": [
       "./node_modules/@types",
