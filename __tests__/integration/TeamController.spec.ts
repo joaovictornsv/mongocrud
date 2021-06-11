@@ -5,19 +5,25 @@ import { ResponseMock, RequestMock } from '../../__mocks__/express/RequestRespon
 
 jest.mock('@entities/Team');
 
+// Models
+type TeamModel = typeof Team;
+
+const TeamMock = Team as jest.Mocked<TeamModel>;
+
 // Controller
-const teamController = new TeamController();
+const TeamControllerMock = TeamController as jest.Mock<TeamController>;
+const teamController = new TeamControllerMock() as jest.Mocked<TeamController>;
 
 // Spies
 const responseStatusCodeSpy = jest.spyOn(ResponseMock, 'status');
 
 // Util Functions
 const createTeamWithSuccess = async () => {
-  Team.create = jest.fn().mockImplementationOnce(() => {
+  TeamMock.create = jest.fn().mockImplementationOnce(() => {
     TeamArrayResponseMock.push('mock-team');
     return TeamResponseMock;
   });
-  Team.findOne = jest.fn().mockResolvedValueOnce(false);
+  TeamMock.findOne = jest.fn().mockResolvedValueOnce(false);
 
   RequestMock.body = TeamResquestMock;
   const response = await teamController.create(RequestMock, ResponseMock);
@@ -34,8 +40,8 @@ describe('TeamController', () => {
   afterEach(() => jest.clearAllMocks());
 
   it('should get array of teams', async () => {
-    Team.find = jest.fn().mockImplementationOnce(() => Team);
-    Team.populate = jest.fn().mockResolvedValueOnce(TeamArrayResponseMock);
+    TeamMock.find = jest.fn().mockImplementationOnce(() => TeamMock);
+    TeamMock.populate = jest.fn().mockResolvedValueOnce(TeamArrayResponseMock);
 
     for (let i = 0; i < 5; i += 1) {
       // eslint-disable-next-line no-await-in-loop
@@ -59,7 +65,7 @@ describe('TeamController', () => {
   });
 
   it('should not create a team if it already exists', async () => {
-    Team.findOne = jest.fn().mockResolvedValueOnce(true);
+    TeamMock.findOne = jest.fn().mockResolvedValueOnce(true);
 
     const response = await teamController.create(RequestMock, ResponseMock);
 

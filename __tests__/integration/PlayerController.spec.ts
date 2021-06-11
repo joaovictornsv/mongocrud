@@ -8,20 +8,29 @@ import { ResponseMock, RequestMock } from '../../__mocks__/express/RequestRespon
 jest.mock('@entities/Player');
 jest.mock('@entities/Team');
 
+// Models
+type PlayerModel = typeof Player;
+type TeamModel = typeof Team;
+
+const PlayerMock = Player as jest.Mocked<PlayerModel>;
+const TeamMock = Team as jest.Mocked<TeamModel>;
+
 // Controller
-const playerController = new PlayerController();
+const PlayerControllerMock = PlayerController as jest.Mock<PlayerController>;
+
+const playerController = new PlayerControllerMock() as jest.Mocked<PlayerController>;
 
 // Spies
 const responseStatusCodeSpy = jest.spyOn(ResponseMock, 'status');
 
 // Util Functions
 const createUserWithSuccess = async () => {
-  Player.create = jest.fn().mockImplementationOnce(() => {
+  PlayerMock.create = jest.fn().mockImplementationOnce(() => {
     PlayerArrayResponseMock.push('mock-player');
     return PlayerResponseMock;
   });
-  Team.findOne = jest.fn().mockResolvedValueOnce(true);
-  Team.findByIdAndUpdate = jest.fn().mockImplementationOnce(() => {
+  TeamMock.findOne = jest.fn().mockResolvedValueOnce(true);
+  TeamMock.findByIdAndUpdate = jest.fn().mockImplementationOnce(() => {
     TeamResponseMock.players.push('mock-player');
   });
 
@@ -47,8 +56,8 @@ describe('PlayerController', () => {
     }
     responseStatusCodeSpy.mockClear();
 
-    Player.find = jest.fn().mockImplementationOnce(() => Player);
-    Player.populate = jest.fn().mockResolvedValueOnce(PlayerArrayResponseMock);
+    PlayerMock.find = jest.fn().mockImplementationOnce(() => Player);
+    PlayerMock.populate = jest.fn().mockResolvedValueOnce(PlayerArrayResponseMock);
     const response = await playerController.indexAll(RequestMock, ResponseMock);
 
     expect(responseStatusCodeSpy).toBeCalledTimes(1);
@@ -94,7 +103,7 @@ describe('PlayerController', () => {
   });
 
   it('should not create a user if a team provided not exists', async () => {
-    Team.findOne = jest.fn().mockResolvedValueOnce(false);
+    TeamMock.findOne = jest.fn().mockResolvedValueOnce(false);
 
     const {
       firstName, lastName, age, position, team,
