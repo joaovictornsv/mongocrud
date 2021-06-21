@@ -1,0 +1,10 @@
+{
+  "entryPoints": ["./src"],
+  "exclude": [
+    "**/*+(index|.spec|.e2e|.d).ts",
+    "**/node_modules/**",
+   "**/declarations/index.d.ts",
+   "./src/*.ts"
+  ],
+  "out": "docs/project"
+}
