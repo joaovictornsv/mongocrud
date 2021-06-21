@@ -3,12 +3,24 @@ import Player from '@entities/Player';
 import Team from '@entities/Team';
 
 class PlayerController {
-  async indexAll(req: Request, res: Response) {
+  /**
+   * Method that get all players
+   * @param req Request
+   * @param res Response
+   * @returns Promise<Response>
+   */
+  async indexAll(req: Request, res: Response): Promise<Response> {
     const profiles = await Player.find().populate({ path: 'team', select: 'name coach -_id' });
 
     return res.status(200).json(profiles);
   }
 
+  /**
+   * Method that create a new Player
+   * @param req Request
+   * @param res Response
+   * @returns Promise<Response>
+   */
   async create(req: Request, res: Response) {
     const {
       firstName,

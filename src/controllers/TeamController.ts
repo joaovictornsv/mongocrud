@@ -2,12 +2,24 @@ import { Request, Response } from 'express';
 import Team from '@entities/Team';
 
 class TeamController {
+  /**
+   * Method that get all Teams
+   * @param req Request
+   * @param res Response
+   * @returns Promise<Response>
+   */
   async indexAll(req: Request, res: Response) {
     const teams = await Team.find().populate({ path: 'players', select: 'firstName lastName position -_id' });
 
     return res.status(200).json(teams);
   }
 
+  /**
+   * Method that create a new Team
+   * @param req Request
+   * @param res Response
+   * @returns Promise<Response>
+   */
   async create(req: Request, res: Response) {
     const { name, coach } = req.body;
 
