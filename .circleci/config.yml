@@ -35,6 +35,7 @@ jobs:
       - run:
           name: Run test coverage
           command: yarn test:coverage
+          
       - coveralls/upload
 
 workflows:
